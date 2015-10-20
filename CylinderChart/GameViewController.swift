@@ -93,11 +93,7 @@ class GameViewController: UIViewController {
         addCylinder(7.0, text: "Python")
         addCylinder(6.0, text: "C#")
         
-        // Animate Torus
-        //cameraNode.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX(2, y: 0, z: 2, duration: 1)))
-        
-        //chartNode.runAction(SCNAction.rotateByX(0, y: 0.5, z: 0, duration: 10))
-
+        //chartNode.runAction(SCNAction.repeatActionForever(SCNAction.rotateByX(0, y: 1.0, z: 0, duration: 2)))
     }
     
     func addCylinder(barHeight: CGFloat, text: String) {
@@ -137,37 +133,10 @@ class GameViewController: UIViewController {
         chartNode.addChildNode(textNode)
         
         xPosition += Float(radius * 3.0) + padding
-        
-        cylinderNode.addAnimation(growingCylinderAnimation(0.0), forKey: "grow")
-    }
-    
-    func growingCylinderAnimation(delay: NSTimeInterval) -> CAAnimation {
-        let grow = CABasicAnimation(keyPath: "geometry.height")
-        grow.fromValue = 0.25
-        let move = CABasicAnimation(keyPath: "position.y")
-        move.fromValue = 0.25 / 2.0
-        
-        let animationGroup = CAAnimationGroup()
-        animationGroup.animations = [grow, move]
-        animationGroup.duration = 5.0
-        animationGroup.beginTime = CACurrentMediaTime() + delay
-        animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animationGroup.fillMode = kCAFillModeBackwards
-        
-        return animationGroup
-    }
-    
-    func cylinderMaterial() -> SCNMaterial {
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor(red: 0.3, green: 0.5, blue: 1.0, alpha: 1.0)
-        material.specular.contents = UIColor.whiteColor()
-        material.shininess = 0.3
-        material.locksAmbientWithDiffuse = true
-        return material
     }
     
     override func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -181,10 +150,5 @@ class GameViewController: UIViewController {
             return .All
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
-    }
-
 }
+
